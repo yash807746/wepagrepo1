@@ -1,0 +1,25 @@
+name: Deploy to Self-Hosted Server
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # This tells GitHub to use your self-hosted runner
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Install dependencies (if any)
+      run: echo "Installing dependencies..."
+      
+    - name: Deploy to server
+      run: |
+        # Replace with your deployment commands
+        echo "Deploying to self-hosted server..."
+        # Example commands (customize for your server):
+        sudo cp -r . /var/www/html/simple-webpage/
+        sudo chown -R www-data:www-data /var/www/html/simple-webpage/
+        sudo systemctl restart apache2  # or nginx if you're using that
